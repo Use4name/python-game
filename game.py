@@ -103,6 +103,12 @@ class Labyrinth:
             # Would have been much better to crop out the robot from the white background but the pictures cant be altered unfortunately...
             if i > 1:
                 self.pictures[i] = pygame.image.load(image_name)
+        #The picture of the robot is way too big, so we need to make it smaller
+        robo_image = pygame.image.load("robo.png")
+        robo_width = 50
+        robo_height = 50
+        self.scaled_image_of_robo = pygame.transform.scale(robo_image, (robo_width, robo_height))
+        #This image of the robot is a little distorted and stretched
 
     #Draws the map
     def new_game(self):
@@ -425,7 +431,7 @@ class Labyrinth:
         #Here we check for coin collision            
         self.coin_collision()
         #And we display the robot with its updated coordinates
-        self.screen.blit(self.pictures[5], (self.x, self.y))
+        self.screen.blit(self.scaled_image_of_robo, (self.x, self.y))
         #Check for win
         if self.game_finished():
             self.winning_screen()
